@@ -2,6 +2,40 @@ const express=require("express");
 const app=express();
 
 
+
+
+//HERE I HAVE WRITTEN ALL HTE MIDDLEWARE CODE IN DIFFERENT FILE , AND NOW OF CODE 
+// IS LOOKING LIKE VERY STRUCTURED WAY .   
+ 
+const { adminAuth, userAuth }=require("./middlewares/auth.js")
+
+
+app.use("/admin",adminAuth);
+
+
+app.get("/user",userAuth, (req,res)=>{
+    res.send("here i am checking for user  ");
+})
+
+app.get("/user/login", (req,res)=>{
+    res.send("you can login , here no auth , because everyone can go to this login page    ");
+})
+
+
+
+app.get("/admin/delete",(req,res)=>{
+    res.send("user deleted ");
+})
+
+app.get("/admin/add",(req,res)=>{
+    res.send("user added ");
+})
+
+
+
+//----------------------------------------------------------------------------------
+
+
 // GOOD WAY OF WRITTING MIDDLEWARE , FIRST OF ALL WE WILL CREATE A  MIDDLEWARE 
 // AND IN THAT WE WILL WRITE AUTH CODE . 
 // THEN AFTER THAT WE WILL CREATE DIFF-DIFF REQ HANDLES WITH USING ROUTE OF MIDDLEWARE 
@@ -15,31 +49,31 @@ const app=express();
 //Handle user authentication for all admin routes using middlewares
 //  (all the routes that is starting with /admin)
 
-app.use("/admin",(req,res,next)=>{
-    console.log("auth process started ");
-    const token="xydz";
-    const isAdmin=token==="xyz";
-    if(!isAdmin){
-        res.status(401).send("unauthorized request ");
-    }
-    else{
-        next();
-    }
-})
-app.get("/user",(req,res)=>{
-    res.send("here i am checking ");
-})
-// THIS /USER WILL NOT CHECK THE AUTH PART CODE . 
+// app.use("/admin",(req,res,next)=>{
+//     console.log("auth process started ");
+//     const token="xydz";
+//     const isAdmin=token==="xyz";
+//     if(!isAdmin){
+//         res.status(401).send("unauthorized request ");
+//     }
+//     else{
+//         next();
+//     }
+// })
+// app.get("/user",(req,res)=>{
+//     res.send("here i am checking ");
+// })
+// // THIS /USER WILL NOT CHECK THE AUTH PART CODE . 
 
 
 
-app.get("/admin/delete",(req,res)=>{
-    res.send("user deleted ");
-})
+// app.get("/admin/delete",(req,res)=>{
+//     res.send("user deleted ");
+// })
 
-app.get("/admin/add",(req,res)=>{
-    res.send("user added ");
-})
+// app.get("/admin/add",(req,res)=>{
+//     res.send("user added ");
+// })
 
 
 // -----------------------------------------------------------------------------
