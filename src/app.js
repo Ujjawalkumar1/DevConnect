@@ -1,35 +1,39 @@
 const express=require("express");
+const connectDB=require("./config/database")
 const app=express();
+const User=require("./models/user")
 
-const { adminAuth, userAuth }=require("./middlewares/auth.js")
-
-
-
-app.use("/admin",adminAuth);
-
-
-app.get("/user",userAuth, (req,res)=>{
-    res.send("here i am checking for user  ");
-})
-
-
-app.get("/user/login", (req,res)=>{
-    res.send("you can login , here no auth , because everyone can go to this login page    ");
-})
-
-
-
-app.get("/admin/delete",(req,res)=>{
-    res.send("user deleted ");
-})
-
-app.get("/admin/add",(req,res)=>{
-    res.send("user added ");
-})
-
-
-
-   
-app.listen(3000,()=>{
-    console.log("server is successfully litening on port 3000..... ");
+app.post("/signup", async(req , res)=>{
+    // creating a new instance of user model 
+   const user=new User({
+     firstName:"ujjawal",
+    lastName:"kumar",
+    emailId:"a@gmail.com",
+    password:"sdkjfdjkuh",
 });
+
+try{
+    await user.save();
+    res.send("user created ");
+}
+catch(err){
+    res.status(400).send("Error saving the user: "+ err.message);
+}
+
+
+});
+
+
+
+
+connectDB()  
+  .then(()=>{
+    console.log("database connected successfully ");
+       
+      app.listen(3000,()=>{
+      console.log("server is successfully litening on port 3000..... ");
+       });
+  })   
+  .catch((err)=>{
+    console.error("error is there ");
+  })
