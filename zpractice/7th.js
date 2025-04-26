@@ -1,34 +1,16 @@
 const express=require("express");
 const connectDB=require("./config/database")
 const app=express();
-const User=require("./models/user");
-const { validateSignUpData } = require("./utils/validation");
-const bcrypt=require("bcrypt");
+const User=require("./models/user")
+
+
 // middleware .
 app.use(express.json());
 
 app.post("/signup", async(req , res)=>{
-  //1 . validation of data 
-  try{
-     
-    validateSignUpData(req);
     // console.log(req.body);
-    // const user=new User(req.body);
-
-    //2. encrypt the password 
-    // const password=req.body.password;   correct synntax is 
-     const {firstName,lastName,emailId,password}=req.body;
-    const passwordHash=await bcrypt.hash(password,10);
-    console.log(passwordHash);
-
-    //3. creating a new 
-    
-    const user=new User({
-      firstName,
-      lastName,
-      emailId,
-      password:passwordHash
-    })
+    const user=new User(req.body);
+    try{
         await user.save();
         res.send("user created ");
     }
@@ -36,31 +18,6 @@ app.post("/signup", async(req , res)=>{
         res.status(400).send("Error saving the user: "+ err.message);
     }
 });
-
-
-
-// LOGIN API 
-app.post("/login",async(req,res)=>{
-  try{
-    const{emailId,password}=req.body;
-    const user=await User.findOne({emailId:emailId});
-    if(!user){
-      throw new Error("invalid credentials");
-    }
-    const isPasswordValid=await bcrypt.compare(password,user.password);
-    if(isPasswordValid){
-      res.send("login successfully !!!! ");
-    }
-    else{
-      throw new Error("Invalid credentials ")
-    }
-  }
-
-  catch(err){
-    res.status(400).send("ERROR : " + err.message);
-  }
-
-})
 
 
 
@@ -80,33 +37,17 @@ app.delete("/user",async(req,res)=>{
 
 // update user 
 
-
-
-
-
-
-
 app.patch("/user",async(req,res)=>{
   const userId=req.body.userId;
   const data=req.body;
-  try{ 
-    const ALLOWED_UPDATES=["userId","firstName","gender"];
-    const isUpdateAllowed=Object.keys(data).every((k)=> 
-      ALLOWED_UPDATES.includes(k)
-    );
-    if(!isUpdateAllowed){
-      throw new Error("Update not allowed");
-    }
-
-
-
+  try{
     const user=await User.findByIdAndUpdate({_id:userId},data,{returnDocument:"after"});
     console.log(user);
     res.send("user updated successfully ");
   }
 
   catch(err){
-    res.status(400).send(" update not allowed  "+ err.message);
+    res.status(400).send("error is there ")
   }
 });
 
@@ -150,7 +91,6 @@ app.get("/feed", async(req,res)=>{
 connectDB()  
   .then(()=>{
     console.log("database connected successfully ");
-
        
       app.listen(3000,()=>{
       console.log("server is successfully litening on port 3000..... ");
