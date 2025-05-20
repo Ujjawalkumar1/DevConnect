@@ -4,8 +4,15 @@ const app=express();
 const User=require("./models/user");
 const { validateSignUpData } = require("./utils/validation");
 const bcrypt=require("bcrypt");
+const { ClientSession } = require("mongodb");
+
+const cookieParser=require("cookie-parser")
 // middleware .
 app.use(express.json());
+app.use(cookieParser());
+
+const jwt=require("jsonwebtoken");
+
 
 app.post("/signup", async(req , res)=>{
   //1 . validation of data 
@@ -37,19 +44,33 @@ app.post("/signup", async(req , res)=>{
     }
 });
 
-
-
 // LOGIN API 
 app.post("/login",async(req,res)=>{
   try{
     const{emailId,password}=req.body;
+    // checking user in db 
     const user=await User.findOne({emailId:emailId});
     if(!user){
       throw new Error("invalid credentials");
     }
+
+    // COMPARING PASSWORD 
     const isPasswordValid=await bcrypt.compare(password,user.password);
+
+
+//cookie code here := 
     if(isPasswordValid){
-      res.send("login successfully !!!! ");
+
+      // CREATING TOKEN 
+      const token =await  jwt.sign({_id:user._id},"DEV@Tinder$790");
+
+      // Adding token to cookie and send back to client along with response 
+
+      res.cookie("token",token)
+
+      res.send("login successfull");
+      // res.cookie("token","abdbuidgfurgbuifvbiuvfvbu");
+      // res.send("login successfully !!!! ");
     }
     else{
       throw new Error("Invalid credentials ")
@@ -61,6 +82,42 @@ app.post("/login",async(req,res)=>{
   }
 
 })
+
+
+
+app.get("/profile",async(req,res)=>{
+  // const cookies=req.cookies;
+  // console.log(cookies);
+  // res.send("reading cookies");
+ 
+  try{
+    const cookies=req.cookies;
+    const{token} = cookies
+    if(!token){
+      throw new Error("invalid token ")
+    }
+
+    // decoding / validating token to get the payload back
+    const decodedToken = await jwt.verify(token,"DEV@Tinder$790");
+    const{_id}=decodedToken
+
+    // find user profile based on id stored in token 
+     
+    console.log("logged in user is : " +_id);
+    const user= await User.findById(_id)
+    if(!user){
+      throw new Error("user does not exist")
+    }
+    res.send(user)
+  }
+
+  catch(err){
+    res.status(400).send("Error " + err.message);
+  }
+});
+
+
+
 
 
 
@@ -144,9 +201,6 @@ app.get("/feed", async(req,res)=>{
 
 
 
-
-
-
 connectDB()  
   .then(()=>{
     console.log("database connected successfully ");
@@ -157,5 +211,6 @@ connectDB()
        });
   })   
   .catch((err)=>{
-    console.error("error is there ");
-  })
+    console.error("Database connection failed. Error:", err);
+  });
+  

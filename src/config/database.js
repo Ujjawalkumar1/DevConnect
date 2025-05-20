@@ -1,12 +1,55 @@
-const mongoose= require("mongoose");
+// const mongoose= require("mongoose");
 
-const connectDB=async ()=>{
-    await mongoose.connect(
-        "mongodb+srv://namastedev:FYVfQBbOg7fNU5kA@namastenode.i7odqtt.mongodb.net/devTinder"
-    );
+// const connectDB=async ()=>{
+//     await mongoose.connect(
+//         "mongodb+srv://namastedev:FYVfQBbOg7fNU5kA@namastenode.i7odqtt.mongodb.net/devTinder"
+//     );
+// };
+
+// module.exports=connectDB;
+
+
+const mongoose = require("mongoose");
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect("mongodb+srv://namastedev:root123@namastenode.i7odqtt.mongodb.net/devTinder");
+    console.log("✅ Database connected successfully");
+  } catch (err) {
+    console.error("❌ Database connection failed. Error:", err);
+  }
 };
 
-module.exports=connectDB;
+module.exports = connectDB;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // OLD WAY TO  CONNECT DATABASE 
