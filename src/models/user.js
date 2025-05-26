@@ -40,7 +40,12 @@ const userSchema=new mongoose.Schema({
             if(!["male","female","others"].includes(value)){
                 throw new Error("not a valid gender")
             }
-        }
+        },
+    },
+
+    photoUrl: {
+      type: String,
+      default: "https://geographyandyou.com/images/user-profile.png",
     },
     about:{
         type:"String",
