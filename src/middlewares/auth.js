@@ -1,34 +1,32 @@
-const User=require ("../models/user");
-const jwt=require("jsonwebtoken");
+const User = require("../models/user");
+const jwt = require("jsonwebtoken");
 
-const userAuth=async(req, res, next)=>{
-    try{
-        // getting token and valid it 
-        const{token}= req.cookies
-        if(!token){
-          //    throw new Error("invalid token");    updation for frontend 
-          return res.status(401).send("please Login! ");
-        }
-        const decodedToken =await jwt.verify(token,"DEV@Tinder$790")
-        const{_id}=decodedToken;
-        //getting user
-        const user= await User.findById(_id)
-        if(!user){
-            throw new Error("User not found ");
-        }
-        //sending user
-        req.user=user
-        next();
+const userAuth = async (req, res, next) => {
+  try {
+    const { token } = req.cookies;
+
+    if (!token) {
+      return res.status(401).send("Please login!");
     }
-    catch(err){
-        res.status(400).send("Error " + err.message )
+
+    const decodedToken = await jwt.verify(token, process.env.JWT_SECRET);
+    const { _id } = decodedToken;
+
+    const user = await User.findById(_id);
+    if (!user) {
+      throw new Error("User not found");
     }
+
+    req.user = user;
+    next();
+  } catch (err) {
+    res.status(400).send("Error: " + err.message);
+  }
 };
 
-module.exports={
-    userAuth
-}
-
+module.exports = {
+  userAuth,
+};
 
 
 // const adminAuth=(req,res,next)=>{

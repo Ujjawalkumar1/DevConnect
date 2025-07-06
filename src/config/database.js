@@ -7,13 +7,11 @@
 // };
 
 // module.exports=connectDB;
-
-
 const mongoose = require("mongoose");
 
 const connectDB = async () => {
   try {
-    await mongoose.connect("mongodb+srv://namastedev:root123@namastenode.i7odqtt.mongodb.net/devTinder");
+    await mongoose.connect(process.env.DB_CONNECTION_SECRET);
     console.log("✅ Database connected successfully");
   } catch (err) {
     console.error("❌ Database connection failed. Error:", err);
