@@ -33,7 +33,6 @@ This backend service provides:
 - **Dotenv** for environment variable management
 
 ---
-
 ## 📁 Folder Structure
 
 devtinder-backend/
@@ -47,7 +46,6 @@ devtinder-backend/
 ├── .gitignore # Files and folders to ignore in Git
 ├── package.json # Project metadata and dependencies
 └── README.md # Project documentation (this file)
-
 
 
 
