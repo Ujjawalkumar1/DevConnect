@@ -7,6 +7,10 @@ This repository contains the complete **backend** codebase that powers the DevTi
 
 ## 🚀 Overview
 
+
+🌐 Frontend
+-  **Frontend:** [devTinder Frontend](https://github.com/Ujjawalkumar1/devTinder-web.git)
+
 This backend service provides:
 
 - 🔐 Secure **Authentication & Authorization** using **JWT** and **bcrypt**
@@ -31,4 +35,56 @@ This backend service provides:
 ---
 
 ## 📁 Folder Structure
+
+devtinder-backend/
+├── config/              # MongoDB connection setup and configuration
+│
+├── middlewares/         # Custom middleware (e.g., JWT auth)
+│
+├── models/              # Mongoose schemas (User, Matches, etc.)
+│
+├── routes/              # All API route definitions (auth, user, etc.)
+│
+├── utils/               # Utility functions (e.g., logout, profile update)
+│
+├── app.js               # Main application entry file (Express config)
+├── .env                 # Environment variables (not pushed to Git)
+├── .gitignore           # Files and folders to ignore in Git
+├── package.json         # Project metadata and dependencies
+└── README.md            # Project documentation (this file)
+
+
+
+
+---
+
+## 📦 Installation
+
+### ⚙️ Prerequisites
+
+- Node.js (v18 or higher)
+- MongoDB (local or cloud - MongoDB Atlas)
+
+### 🧑‍💻 Setup
+
+1. Clone the backend repository:
+
+```bash
+git clone https://github.com/Ujjawalkumar1/devTinder.git
+
+
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+
+
+
 
