@@ -8,8 +8,8 @@ This repository contains the complete **backend** codebase that powers the DevTi
 ## 🚀 Overview
 
 
-🌐 Frontend
--  **Frontend:** [devTinder Frontend](https://github.com/Ujjawalkumar1/devTinder-web.git)
+
+## 🔗 **🌐Frontend:** [devTinder Frontend](https://github.com/Ujjawalkumar1/devTinder-web.git)
 
 This backend service provides:
 
