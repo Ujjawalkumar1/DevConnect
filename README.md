@@ -35,18 +35,19 @@ This backend service provides:
 ---
 ## 📁 Folder Structure
 
+```
 devtinder-backend/
-├── config/ # MongoDB connection setup and configuration
-├── middlewares/ # Custom middleware (e.g., JWT auth)
-├── models/ # Mongoose schemas (User, Matches, etc.)
-├── routes/ # All API route definitions (auth, user, etc.)
-├── utils/ # Utility functions (e.g., logout, profile update)
-├── app.js # Main application entry file (Express config)
-├── .env # Environment variables (not pushed to Git)
-├── .gitignore # Files and folders to ignore in Git
-├── package.json # Project metadata and dependencies
-└── README.md # Project documentation (this file)
-
+├── config/              # MongoDB connection setup and configuration
+├── middlewares/         # Custom middleware (e.g., JWT auth)
+├── models/              # Mongoose schemas (User, Matches, etc.)
+├── routes/              # All API route definitions (auth, user, etc.)
+├── utils/               # Utility functions (e.g., logout, profile update)
+├── app.js               # Main application entry file (Express config)
+├── .env                 # Environment variables (not pushed to Git)
+├── .gitignore           # Files and folders to ignore in Git
+├── package.json         # Project metadata and dependencies
+└── README.md            # Project documentation (this file)
+```
 
 
 
