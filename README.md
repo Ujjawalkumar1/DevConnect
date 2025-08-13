@@ -1,6 +1,6 @@
-# 🔥 DevTinder Backend
+# 🔥 DevConnect Backend
 
-**DevTinder** is a Tinder-inspired full-stack web application for developers to **connect**, **collaborate**, and **contribute**!  
+**DevConnect** is a Tinder-inspired full-stack web application for developers to **connect**, **collaborate**, and **contribute**!  
 This repository contains the complete **backend** codebase that powers the DevTinder platform — built with **Node.js**, **Express.js**, and **MongoDB**.
 
 ---
