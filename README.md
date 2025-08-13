@@ -9,7 +9,7 @@ This repository contains the complete **backend** codebase that powers the DevTi
 
 
 
-## 🔗 **🌐Frontend:** [devTinder Frontend](https://github.com/Ujjawalkumar1/devTinder-web.git)
+## 🔗 **🌐Frontend:** [DevConnect Frontend](https://github.com/Ujjawalkumar1/DevConnect-web.git)
 
 This backend service provides:
 
@@ -36,7 +36,7 @@ This backend service provides:
 ## 📁 Folder Structure
 
 ```
-devtinder-backend/
+DevConnect-backend/
 ├── config/              # MongoDB connection setup and configuration
 ├── middlewares/         # Custom middleware (e.g., JWT auth)
 ├── models/              # Mongoose schemas (User, Matches, etc.)
@@ -66,7 +66,7 @@ devtinder-backend/
 1. Clone the backend repository:
 
 ```bash
-git clone https://github.com/Ujjawalkumar1/devTinder.git
+git clone https://github.com/Ujjawalkumar1/DevConnect.git
 
 
 
